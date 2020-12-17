@@ -1,13 +1,13 @@
 
-if (process.env.NODE_ENV !== 'production'){
-    require('dotenv').config()
+if (process.env.Node_ENV !== 'production'){
+    require('dotenv').load()
 }
 
-const express = require('express')
+const express = require("express");
 const app = express()
-import expressLayouts from "express-ejs-layouts";
+const expressLayouts = require("express-ejs-layouts");
 
-import indexRouter from './routes/index';
+const indexRouter = require('./routes/index');
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -16,7 +16,7 @@ app.use(expressLayouts)
 app.use(static('public'))
 
 
-import { connect, connection } from 'mongoose';
+const mongoose = require('mongoose');
 connect(process.env.DATABASE_URL, {
     useNewUrlParser : true, useUnifiedTopology: true
     })
