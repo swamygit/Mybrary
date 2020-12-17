@@ -3,25 +3,25 @@ if (process.env.Node_ENV !== 'production'){
     require('dotenv').config();
 }
 
-const express = require("express")
+import express, { static } from "express";
 const app = express()
-const expressLayouts = require("express-ejs-layouts")
+import expressLayouts from "express-ejs-layouts";
 
-const indexRouter = require('./routes/index')
+import indexRouter from './routes/index';
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 app.set('layout','layouts/layout')
 app.use(expressLayouts)
-app.use(express.static('public'))
+app.use(static('public'))
 
 
-const mongoose  = require('mongoose')
-mongoose.connect(process.env.DATABASE_URL, {
+import { connect, connection } from 'mongoose';
+connect(process.env.DATABASE_URL, {
     useNewUrlParser : true, useUnifiedTopology: true
     })
 
-const db = mongoose.connection
+const db = connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
 app.use('/', indexRouter)
