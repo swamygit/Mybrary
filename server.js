@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
 
-import express, { static } from "express";
+const express = require('express')
 const app = express()
 import expressLayouts from "express-ejs-layouts";
 
